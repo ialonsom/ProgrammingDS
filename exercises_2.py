@@ -141,14 +141,14 @@ def exercise4():
 if __name__ == '__main__':
 
     # Call method for Exercise 1
-    exercise4()
+    exercise1()
     # Call method for Exercise 2
-    # exercise2()
-    # # Call method for Exercise 3
-    # exercise3()
-    # # Call method for Exercise 4
-    # exercise4()
-    # # Call method for Exercise 5
+    exercise2()
+    # Call method for Exercise 3
+    exercise3()
+    # Call method for Exercise 4
+    exercise4()
+    # Call method for Exercise 5
     # exercise5()
     # # Call method for Exercise 6
     # exercise6()
