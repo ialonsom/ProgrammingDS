@@ -95,7 +95,25 @@ def exercise3():
     print("\n")
     print("EXERCISE 3")
 
-    # Aqui va el ejercicio 3
+    dictionary = {"merry":"feliz","christmas":"Navidad","and":"y","happy":"próspero","new":"nuevo","year":"año"}
+    inp = input("Please write your sentence in English: ")
+
+    def readSentence(sentence):
+        splitted = sentence.split()
+        return(splitted)
+    splitted = readSentence(inp)
+    print("List with the words in English: ", splitted)
+
+    def translate(dictio,sent):
+        keys = list(dictio.keys())
+        changing = sent[:]
+        for en in range(0,len(changing)):
+            if changing[en] in keys:
+               changing[en] = dictio[changing[en]]
+        return(changing)
+    translation = translate(dictionary,splitted)
+    print("List with the words translated into Spanish: ",translation)
+
 
 
 def exercise4():
