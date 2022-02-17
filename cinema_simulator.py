@@ -52,7 +52,7 @@ class Cinema:
         # Define an empty list with the size of the cinema
         list_seats = [[0 for x in range(self.num_cols)] for y in range(self.num_rows)]
         # Define a list with the alphabet to create the columns of the seats
-        alphabet = string.ascii_lowercase
+        alphabet = string.ascii_uppercase
 
         for i in range(self.num_rows):
             for j in range(self.num_cols):
