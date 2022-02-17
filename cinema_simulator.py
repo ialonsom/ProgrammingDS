@@ -1,6 +1,7 @@
 from random import randint
 from xmlrpc.client import boolean
 import logging
+import string
 
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
@@ -49,11 +50,13 @@ class Cinema:
     def createSeats(self):
 
         # Define an empty list with the size of the cinema
-        list_seats = [[0 for x in range(self.num_cols)] for y in range(self.num_rows)] 
+        list_seats = [[0 for x in range(self.num_cols)] for y in range(self.num_rows)]
+        # Define a list with the alphabet to create the columns of the seats
+        alphabet = string.ascii_lowercase
 
         for i in range(self.num_rows):
             for j in range(self.num_cols):
-                list_seats[i][j] =  Seat(i, j, True, "")
+                list_seats[i][j] =  Seat(i, alphabet[j], True, "")
         return list_seats
 
     def availableSeats(self):
