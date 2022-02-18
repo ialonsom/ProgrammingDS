@@ -6,7 +6,6 @@ def exercise1():
     counts the number of integers below '11' and returns a
     sublist of those elements that are less than half of the
     average of the elements in the list.
-
     """
 
     print("\n")
@@ -39,7 +38,6 @@ def exercise2():
         3. Prints what is the value of the highest copy number for all
         the genes
         4. Constructs a dictionary gene_name -> gene_copy_number
-
     """
 
     print("\n")
@@ -132,28 +130,12 @@ def exercise4():
     print("\n")
     print("EXERCISE 4")
 
-    class Tree:
- 
-        def __init__(self, value=None, left=None, right=None):
-    
-            self.left = left
-            self.right = right
-            self.value = value
-    
-        def PrintTree(self):
-            print(self.value)
-            if self.left:
-                self.left.PrintTree()
-            if self.right:
-                self.right.PrintTree()
-    root = Tree(3)
-    root.left = Tree(2)
-    root.right = Tree(1)
-    root.left.left = Tree(5)
-    root.left.right = Tree(4)
-    root.right.right = Tree(6)
-    
-    root.PrintTree()
+    a = ['01', '02', '03', '04', '05', '06', '  ', ' /', '\\', ' ', '\n']
+    print(a[6] + a[6] + a[6] + a[2] + a[6] + a [6] + a[6] + a[-1] +
+    a[6] + a[7] + a[6] + a[6] + a[6] + a[8] + a[6] + a[-1] +
+    a[6] + a[1] + a[6] + a[6] + a[6] + a[4] + a[6] + a[-1] +
+    a[7] + a[6] + a[8] + a[6] + a[7] + a[6] + a[9] + a[8] + a[-1] +
+    a[0] + a[6] + a[6] + a[6] + a[3] + a[6] + a[5])
 
 
 if __name__ == '__main__':
@@ -166,11 +148,3 @@ if __name__ == '__main__':
     exercise3()
     # Call method for Exercise 4
     exercise4()
-    # Call method for Exercise 5
-    # exercise5()
-    # # Call method for Exercise 6
-    # exercise6()
-    # # Call method for Exercise 7
-    # exercise7()
-    # # Call method for Exercise 8
-    # exercise8()
