@@ -134,8 +134,8 @@ class Cinema:
             # We create a while to allocate the spectator but only if he/she is able to whatch the film
             while(isFree&canWatch):
                 # We select a random row and a random column
-                row = randint(0, self.num_rows)
-                col = randint(0, self.num_cols)
+                row = randint(0, self.num_rows-1)
+                col = randint(0, self.num_cols-1)
                 # We check if the seat is free. If it is free we allocate the spectator, if it is not we try with another seat
                 if(self.list_seats[row][col].free):
                     # Call the method 'ocupateSeat' to allocate the spectator in the specific seat
