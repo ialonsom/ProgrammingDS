@@ -5,14 +5,14 @@ def exercise1():
     """
     Point 1: Compute the ranking of usernames according to number of
     login attempts
-    
+
     """
 
     # Create a pattern to find the name of the user
 
     """
     Example for valid session:
-     - Check if the match is for the first component of the pattern (group 1)
+     - Session opened for user root by (uid=0)
     Example of invalid attempt:
      - Invalid user yoyo from 106.52.116.101 port 53873
      - Failed password for invalid user yoyo from 106.52.116.101 port 53873 ssh2
