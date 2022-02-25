@@ -35,7 +35,7 @@ def exercise1():
                 if match.group(3) is not 'None':
                     attempts[match.group(3)] += 1
             except:
-                # If the user doesn't exit we store the new user
+                # If the user doesn't exist we store the new user
 
                 # Check if the match is for the first component of the pattern (group 1)
                 if match.group(1) is not 'None':
@@ -165,7 +165,7 @@ def exercise3():
                 if match.group(2) is not 'None':
                     attempts[match.group(2)] += 1
             except:
-                # If the user doesn't exit we store the new user
+                # If the user doesn't exist we store the new user
 
                 # Check if the match is for the first component of the pattern (group 1)
                 if match.group(1) is not 'None':
@@ -185,6 +185,9 @@ if __name__ == '__main__':
 
     # Call method for Exercise 1
     exercise1()
+    
+    # Call method for Exercise 2
+    exercise2()
 
-    # Call method for Exercise 1
+    # Call method for Exercise 3
     exercise3()
