@@ -163,6 +163,7 @@ def exercise3():
     # Create a pattern to find the name of the user and the source IP
 
     """
+    
     Example of invalid attempt:
      - Invalid user yoyo from 106.52.116.101 port 53873
      - Failed password for invalid user yoyo from 106.52.116.101 port 53873 ssh2
@@ -211,23 +212,17 @@ def exercise4():
 
     # Create a pattern to find the IP of the user 
 
-    # """
-    # Example of invalid attempts with date
-    # - Dec 15 06:26:55 crowds-ml sshd[19538]: Invalid user slottan from 106.12.118.30 port 42486
-    # - Dec 15 06:25:05 crowds-ml sshd [19321]: Failed password for invalid user yoyo from 106.52.116.101 port 53873 ssh2
-    # """
-
-    pattern = re.compile("\w{2,} \d{2} (\d{2}:\d{2}:\d{2}) crowds-ml sshd\W\d{5}\W: Invalid user \w* from (\d*.\d*.\d*.\d*)|\w{2,} \d{2} (\d{2}:\d{2}:\d{2}) crowds-ml sshd\W\d{5}\W: Failed password for invalid user \w* from (\d*.\d*.\d*.\d*)")
-
     """
     Example for valid session:
-    - Session opened for user root by (uid=0)
-    Example of invalid attempt:
-    - Invalid user yoyo from 106.52.116.101 port 53873
-    - Failed password for invalid user yoyo from 106.52.116.101 port 53873 ssh2
+     - Accepted password for aftoral from 79.150.140.15 port 57667 ssh2
+    Example of invalid attempts with date
+    - Dec 15 06:26:55 crowds-ml sshd[19538]: Invalid user slottan from 106.12.118.30 port 42486
+    - Dec 15 06:25:05 crowds-ml sshd [19321]: Failed password for invalid user yoyo from 106.52.116.101 port 53873 ssh2
     """
-    # pattern = re.compile("session opened for user (\w+\d*) by|Invalid user (\w+\d*) from|Failed password for invalid user (\w+\d*) from")
 
+    pattern = re.compile("\w{2,} \d{2} (\d{2}:\d{2}:\d{2}) crowds-ml sshd\W\d{5}\W: Invalid user \w* from (\d*.\d*.\d*.\d*)|\w{2,} \d{2} (\d{2}:\d{2}:\d{2}) crowds-ml sshd\W\d{5}\W: Failed password for invalid user \w* from (\d*.\d*.\d*.\d*)|\w{2,} \d{2} (\d{2}:\d{2}:\d{2}) crowds-ml sshd\W\d{5}\W: Accepted password for \w* from (\d*.\d*.\d*.\d*)")
+
+    
     from datetime import datetime
 
     # Create a dictionary to store the IPs and times
@@ -252,6 +247,14 @@ def exercise4():
                     times[match.group(4)][0] +=  dif
                     times[match.group(4)][1] +=  1
                     times[match.group(4)][2] =  match.group(3)
+                
+                if (match.group(5) is not None) and (match.group(6) is not None):
+                    a = datetime.strptime(times[match.group(6)][2], '%H:%M:%S')
+                    b = datetime.strptime(match.group(5), '%H:%M:%S')
+                    dif = (b-a).total_seconds()
+                    times[match.group(6)][0] +=  dif
+                    times[match.group(6)][1] +=  1
+                    times[match.group(6)][2] =  match.group(5)
 
             except:
                 if (match.group(1) is not None) and (match.group(2) is not None):
@@ -259,6 +262,9 @@ def exercise4():
 
                 if (match.group(3) is not None) and (match.group(4) is not None):
                     times[match.group(4)] =  [0, 1, match.group(3)]
+
+                if (match.group(5) is not None) and (match.group(6) is not None):
+                    times[match.group(6)] =  [0, 1, match.group(5)]
     tuples = dict([])
     for i in times:
         avg = round(times[i][0]/times[i][1], 2)
