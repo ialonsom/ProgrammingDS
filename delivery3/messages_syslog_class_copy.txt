@@ -1,0 +1,19 @@
+Dec 15 06:25:02 crowds-ml liblogging-stdlog:  [origin software="rsyslogd" swVersion="8.24.0" x-pid="304" x-info="http://www.rsyslog.com"] rsyslogd was HUPed
+Dec 15 06:25:02 crowds-ml systemd[1]: Stopping Zabbix Agent...
+Dec 15 06:25:02 crowds-ml systemd[1]: Stopped Zabbix Agent.
+Dec 15 06:25:02 crowds-ml systemd[1]: Started Zabbix Agent.
+Dec 15 06:25:02 crowds-ml zabbix_agentd[19418]: Starting Zabbix Agent [crowds-ml]. Zabbix 3.0.7 (revision 64609).
+Dec 15 06:25:02 crowds-ml zabbix_agentd[19418]: Press Ctrl+C to exit.
+Dec 15 06:25:02 crowds-ml CRON[19325]: pam_unix(cron:session): session closed for user root
+Dec 15 06:25:03 crowds-ml sshd[19321]: Invalid user yoyo from 106.52.116.101 port 53873
+Dec 15 06:25:03 crowds-ml sshd[19321]: input_userauth_request: invalid user yoyo [preauth]
+Dec 15 06:25:03 crowds-ml sshd[19321]: pam_unix(sshd:auth): check pass; user unknown
+Dec 15 06:25:03 crowds-ml sshd[19321]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=106.52.116.101
+Dec 15 06:25:04 crowds-ml sshd[19390]: Invalid user VTech from 45.136.108.85 port 53966
+Dec 15 06:25:04 crowds-ml sshd[19390]: input_userauth_request: invalid user VTech [preauth]
+Dec 15 06:25:05 crowds-ml sshd[19390]: pam_unix(sshd:auth): check pass; user unknown
+Dec 15 06:25:05 crowds-ml sshd[19390]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=45.136.108.85
+Dec 15 06:25:05 crowds-ml sshd[19321]: Failed password for invalid user yoyo from 106.52.116.101 port 53873 ssh2
+Dec 15 06:25:25 crowds-ml sshd[19321]: Failed password for invalid user yoyo from 106.52.116.101 port 53873 ssh2
+Dec 15 06:25:40 crowds-ml sshd[19321]: Failed password for invalid user yoyo from 106.52.116.101 port 53873 ssh2
+Dec 15 06:25:55 crowds-ml sshd[19321]: Failed password for invalid user yoyo from 106.52.116.101 port 53873 ssh2
