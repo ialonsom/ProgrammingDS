@@ -58,7 +58,7 @@ def exercise3():
     Point 3: Obtain a Ranking of failed login attempts by source IP
     """
 
-    # Create a pattern to find the name of the user
+    # Create a pattern to find the name of the user and the source IP
 
     """
     Example of invalid attempt:
@@ -90,7 +90,7 @@ def exercise3():
                     attempts[match.group(1)] =  1
 
                 # Check if the match is for the second component of the pattern (group 2)
-                if match.group(1) is not 'None':
+                if match.group(2) is not 'None':
                     attempts[match.group(2)] =  1
 
 
