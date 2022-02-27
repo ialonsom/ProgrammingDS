@@ -1,4 +1,5 @@
 import re
+from datetime import datetime
 
 def exercise1():
 
@@ -223,52 +224,108 @@ def exercise4():
     pattern = re.compile("\w{2,} \d{2} (\d{2}:\d{2}:\d{2}) crowds-ml sshd\W\d{5}\W: Invalid user \w* from (\d*.\d*.\d*.\d*)|\w{2,} \d{2} (\d{2}:\d{2}:\d{2}) crowds-ml sshd\W\d{5}\W: Failed password for invalid user \w* from (\d*.\d*.\d*.\d*)|\w{2,} \d{2} (\d{2}:\d{2}:\d{2}) crowds-ml sshd\W\d{5}\W: Accepted password for \w* from (\d*.\d*.\d*.\d*)")
 
     
-    from datetime import datetime
-
     # Create a dictionary to store the IPs and times
     times = dict([])
 
     for line in open("messages_syslog_class.txt"):
         for match in re.finditer(pattern, line):
             try:
+                # If the IP exits in the dictionary:
+
+                # Check if the match is for the first component of the pattern, where the group 1 
+                # is the time and the group 2 is the IP source
                 if (match.group(1) is not None) and (match.group(2) is not None):
 
+                    # First we take the time of the previous attemp for this IP that is 
+                    # stored in the third position of the dictionary
                     a = datetime.strptime(times[match.group(2)][2], '%H:%M:%S')
+                    # The second time is the time of the actual log found with the pattern
                     b = datetime.strptime(match.group(1), '%H:%M:%S')
+
+                    # Calculate the difference in seconds between the actual attemp and the previous one
                     dif = (b-a).total_seconds()
+
+                    # Store the difference of the time between attempts in the first position of the list
                     times[match.group(2)][0] +=  dif
+                    # Add one to the counter of the second position of the list
                     times[match.group(2)][1] +=  1
+                    # Store the time of this attemp in the third position of the list
                     times[match.group(2)][2] =  match.group(1)
 
+                # Check if the match is for the second component of the pattern, where the group 3 
+                # is the time and the group 4 is the IP source
                 if (match.group(3) is not None) and (match.group(4) is not None):
+                    
+                    # First we take the time of the previous attemp for this IP that is 
+                    # stored in the third position of the dictionary
                     a = datetime.strptime(times[match.group(4)][2], '%H:%M:%S')
+                    # The second time is the time of the actual log found with the pattern
                     b = datetime.strptime(match.group(3), '%H:%M:%S')
+
+                    # Calculate the difference in seconds between the actual attemp and the previous one
                     dif = (b-a).total_seconds()
+
+                    # Store the difference of the time between attempts in the first position of the list
                     times[match.group(4)][0] +=  dif
+                    # Add one to the counter of the second position of the list
                     times[match.group(4)][1] +=  1
                     times[match.group(4)][2] =  match.group(3)
                 
+                # Check if the match is for the second component of the pattern, where the group 5 
+                # is the time and the group 6 is the IP source
                 if (match.group(5) is not None) and (match.group(6) is not None):
+                    # First we take the time of the previous attemp for this IP that is 
+                    # stored in the third position of the dictionary
                     a = datetime.strptime(times[match.group(6)][2], '%H:%M:%S')
+                    # The second time is the time of the actual log found with the pattern
                     b = datetime.strptime(match.group(5), '%H:%M:%S')
+
+                    # Calculate the difference in seconds between the actual attemp and the previous one
                     dif = (b-a).total_seconds()
+
+                    # Store the difference of the time between attempts in the first position of the list
                     times[match.group(6)][0] +=  dif
+                    # Add one to the counter of the second position of the list
                     times[match.group(6)][1] +=  1
+                    # Store the time of this attemp in the third position of the list
                     times[match.group(6)][2] =  match.group(5)
 
             except:
+                # If the IP does't exists in the dictionary because is the first time it tries to loggin:
+
+
+                # Check if the match is for the first component of the pattern, where the group 1 
+                # is the time and the group 2 is the IP source
                 if (match.group(1) is not None) and (match.group(2) is not None):
+                    # We store the IP in the dictionary with a value of a list, where the first component
+                    # of the list is the sum of differences between attempts, the second one is the number 
+                    # of attempts and the third one is the time of attempt of the last time (Group 1)
                     times[match.group(2)] =  [0, 1, match.group(1)]
 
+                # Check if the match is for the second component of the pattern, where the group 3 
+                # is the time and the group 4 is the IP source
                 if (match.group(3) is not None) and (match.group(4) is not None):
+                    # We store the IP in the dictionary with a value of a list, where the first component
+                    # of the list is the sum of differences between attempts, the second one is the number 
+                    # of attempts and the third one is the time of attempt of the last time (Group 3)
                     times[match.group(4)] =  [0, 1, match.group(3)]
 
+                # Check if the match is for the second component of the pattern, where the group 5 
+                # is the time and the group 6 is the IP source
                 if (match.group(5) is not None) and (match.group(6) is not None):
+                    # We store the IP in the dictionary with a value of a list, where the first component
+                    # of the list is the sum of differences between attempts, the second one is the number 
+                    # of attempts and the third one is the time of attempt of the last time (Group 5)
                     times[match.group(6)] =  [0, 1, match.group(5)]
+    # Create a new dictionary to store the average
     tuples = dict([])
+    # Create a loop to calculate the average for each element
     for i in times:
+        # the mean is the division between the total sum of the time between attempts (first position)
+        # and the total number of attempts for that IP (second position)
         avg = round(times[i][0]/times[i][1], 2)
         tuples[i] = avg
+
     # We transform the dictionary into a sorted list of tuples
     times_sorted=sorted(tuples.items(), key=lambda item: item[1])
 
