@@ -27,31 +27,35 @@ def exercise1():
                 # If the user exists we add one to the number of attempts
 
                 # Check if the match is for the first component of the pattern (group 1)
-                if match.group(1) is not None:
+                if match.group(1)!='None':
                     attempts[match.group(1)] += 1
                 # Check if the match is for the second component of the pattern (group 2)
-                if match.group(2) is not None:
+                if match.group(2)!='None':
                     attempts[match.group(2)] += 1
                 # Check if the match is for the third component of the pattern (group 3)
-                if match.group(3) is not None:
+                if match.group(3)!='None':
                     attempts[match.group(3)] += 1
             except:
                 # If the user doesn't exist we store the new user
 
                 # Check if the match is for the first component of the pattern (group 1)
-                if match.group(1) is not None:
+                if match.group(1)!='None':
                     attempts[match.group(1)] =  1
                 # Check if the match is for the second component of the pattern (group 2)
-                if match.group(2) is not None:
+                if match.group(2)!='None':
                     attempts[match.group(2)] =  1
                 # Check if the match is for the third component of the pattern (group 3)
-                if match.group(3) is not None:
+                if match.group(3)!='None':
                     attempts[match.group(3)] =  1
 
     # We transform the dictionary into a sorted list of tuples
     attempts_sorted=sorted(attempts.items(), key=lambda item: item[1], reverse=True)
 
+    print("Exercise 1")
+    print()
     print(attempts_sorted)
+    print()
+
     
 def exercise2():
 
@@ -72,8 +76,14 @@ def exercise2():
     # Create a dictionary to store the user names and login attempts
     attempts = dict([])
 
-    # Counter to sum all the login attempts
+    # count to sum all the login attempts
     count = 0
+
+    # Define the number of unics attempts for each quarter
+    n_q1 = 0
+    n_q2 = 0
+    n_q3 = 0
+    n_q4 = 0
 
     for line in open("messages_syslog_class.txt"):
         for match in re.finditer(pattern, line):
@@ -81,15 +91,15 @@ def exercise2():
                 # If the user exists we add one to the number of attempts
 
                 # Check if the match is for the first component of the pattern (group 1)
-                if match.group(1) is not None:
+                if match.group(1)!='None':
                     attempts[match.group(1)] += 1
                     count += 1
                 # Check if the match is for the second component of the pattern (group 2)
-                if match.group(2) is not None:
+                if match.group(2)!='None':
                     attempts[match.group(2)] += 1
                     count += 1
                 # Check if the match is for the third component of the pattern (group 3)
-                if match.group(3) is not None:
+                if match.group(3)!='None':
                     attempts[match.group(3)] += 1
                     count += 1
 
@@ -97,63 +107,99 @@ def exercise2():
                 # If the user doesn't exist we store the new user
 
                 # Check if the match is for the first component of the pattern (group 1)
-                if match.group(1) is not None:
+                if match.group(1)!='None':
                     attempts[match.group(1)] =  1
                     count += 1
 
                 # Check if the match is for the second component of the pattern (group 2)
-                if match.group(2) is not None:
+                if match.group(2)!='None':
                     attempts[match.group(2)] =  1
                     count += 1
 
                 # Check if the match is for the second component of the pattern (group 2)
-                if match.group(3) is not None:
+                if match.group(3)!='None':
                     attempts[match.group(3)] =  1
                     count += 1
 
-    # all_values = attempts.values()
-    # max_value = max(all_values)
+ 
+    print()
+    print("Exercise 2")
+    print()
 
-    # q1 = max_value/4
     # Calculate the quarters of the login attempts
     q1 = count/4
     print("Quarters: ", q1, q1*2, q1*3, q1*4)
 
-    # Define the number of unics attempts for each quarter
-    n_q1 = 0
-    n_q2 = 0
-    n_q3 = 0
-    n_q4 = 0
-    
-    # Create a loop to extract the number of attempts of each IP
-    for attempt in attempts:
+    count = 0
+    attempts = dict([])
 
-        # Check if the IP belongs to the first quarter
-        if (attempts[attempt] <= q1):
-            # If it belongs to the first quarter add 1
-            n_q1 += 1
+    for line in open("messages_syslog_class.txt"):
+        for match in re.finditer(pattern, line):
+            try:
+                # When the limit of the first quartile is passed, the dictionary is cleaned to store new unique IPs again
+                if (count == q1):
+                    attempts = dict([])
+                # When the limit of the second quartile is passed, the dictionary is cleaned to store new unique IPs again
+                if (count == q1*2):
+                    attempts = dict([])
+                # When the limit of the third quartile is passed, the dictionary is cleaned to store new unique IPs again
+                if (count == q1*3):
+                    attempts = dict([])
+                
+                # If the user exists we add one to the number of attempts
 
-        # Check if the IP belongs to the second quarter
-        if (attempts[attempt] > q1 and attempts[attempt] <= q1*2):
+                # Check if the match is for the first component of the pattern (group 1)
+                if match.group(1)!='None':
+                    attempts[match.group(1)] += 1
+                    count += 1
+                # Check if the match is for the second component of the pattern (group 2)
+                if match.group(2)!='None':
+                    attempts[match.group(2)] += 1
+                    count += 1
+                # Check if the match is for the third component of the pattern (group 3)
+                if match.group(3)!='None':
+                    attempts[match.group(3)] += 1
+                    count += 1
 
-            # If it belongs to the second quarter add 1
-            n_q2 += 1
+            except:
+                # If the user doesn't exist we store the new user
 
-        # Check if the IP belongs to the third quarter
-        if attempts[attempt] > q1*2 and attempts[attempt] <= q1*3:
-            
-            # If it belongs to the third quarter add 1
-            n_q3 += 1
+                # Check if the match is for the first component of the pattern (group 1)
+                if match.group(1)!='None':
+                    attempts[match.group(1)] =  1
+                    count += 1
 
-        # Check if the IP belongs to the fourth quarter
-        if attempts[attempt] > q1*3 and attempts[attempt] <= q1*4:
+                # Check if the match is for the second component of the pattern (group 2)
+                if match.group(2)!='None':
+                    attempts[match.group(2)] =  1
+                    count += 1
 
-            # If it belongs to the second fourth add 1
-            n_q4 += 1
+                # Check if the match is for the second component of the pattern (group 2)
+                if match.group(3)!='None':
+                    attempts[match.group(3)] =  1
+                    count += 1
+
+                # The count of unique IPs in the first quantile is increased if the count is in the first quartile
+                if (count <= q1):
+                    n_q1 += 1
+
+                # The count of unique IPs in the second quantile is increased if the count is in the second quartile
+                if (q1 < count <= 2*q1):
+                    n_q2 += 1
+
+                # The count of unique IPs in the third quantile is increased if the count is in the third quartile
+                if (2*q1 < count <= 3*q1):
+                    n_q3 += 1
+
+                # The count of unique IPs in the fourth quantile is increased if the count is in the fourth quartile
+                if (3*q1 < count <= count):
+                    n_q4 += 1
+
 
     # Print the distribution
-    distribution = [("0<x<=q1",n_q1), ("q1<x<=q2",n_q2), ("q2<x<=q3",n_q4), ("q3<x<=q4",n_q4)]
+    distribution = [("0 < x <= q1",n_q1), (" q1 < x <= q2",n_q2), ("q2 < x <= q3",n_q4), ("q3 < x <= q4",n_q4)]
     print(distribution)
+    print()
 
 def exercise3():
 
@@ -164,7 +210,6 @@ def exercise3():
     # Create a pattern to find the name of the user and the source IP
 
     """
-    
     Example of invalid attempt:
      - Invalid user yoyo from 106.52.116.101 port 53873
      - Failed password for invalid user yoyo from 106.52.116.101 port 53873 ssh2
@@ -181,34 +226,37 @@ def exercise3():
                 # If the user exists we add one to the number of attempts
 
                 # Check if the match is for the first component of the pattern (group 1)
-                if match.group(1) is not None:
+                if match.group(1)!='None':
                     attempts[match.group(1)] += 1
                 # Check if the match is for the second component of the pattern (group 2)
-                if match.group(2) is not None:
+                if match.group(2)!='None':
                     attempts[match.group(2)] += 1
             except:
                 # If the user doesn't exist we store the new user
 
                 # Check if the match is for the first component of the pattern (group 1)
-                if match.group(1) is not None:
+                if match.group(1)!='None':
                     attempts[match.group(1)] =  1
 
                 # Check if the match is for the second component of the pattern (group 2)
-                if match.group(2) is not None:
+                if match.group(2)!='None':
                     attempts[match.group(2)] =  1
 
 
     # We transform the dictionary into a sorted list of tuples
     failed_attempts_sorted=sorted(attempts.items(), key=lambda item: item[1], reverse=True)
 
+    print("Exercise 3")
+    print()
     print(failed_attempts_sorted)
+    print()
+
 
 def exercise4():
 
     """
     Point 4: Compute the reverse ranking of average period between
     login attempts (seconds)
-
     """
 
     # Create a pattern to find the IP of the user 
@@ -329,17 +377,20 @@ def exercise4():
     # We transform the dictionary into a sorted list of tuples
     times_sorted=sorted(tuples.items(), key=lambda item: item[1])
 
+    print("Exercise 4")
+    print()
     print(times_sorted)
+
     
 if __name__ == '__main__':
 
-    # # Call method for Exercise 1
+    # Call method for Exercise 1
     exercise1()
     
-    # # Call method for Exercise 2
+    # Call method for Exercise 2
     exercise2()
 
-    # # Call method for Exercise 3
+    # Call method for Exercise 3
     exercise3()
 
     # Call method for Exercise 4
