@@ -77,7 +77,7 @@ if __name__ == '__main__':
     df_trackers = webDriver("https://www.investing.com/etfs/db-x-trackers-ii-global-sovereign-5-historical-data")
 
     # Save the dataset in a csv
-    df_trackers.to_csv("db-x-trackers-ii-global-sovereign-5.csv.csv")
+    df_trackers.to_csv("db-x-trackers-ii-global-sovereign-5.csv")
     df_trackers.to_csv(index=True)
 
     # Gold
