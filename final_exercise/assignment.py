@@ -9,8 +9,7 @@ from selenium.webdriver.support import expected_conditions as EC
 def webDriver(url):
     # driver = webdriver.Chrome()
     driver = webdriver.Firefox()
-    # driver.get("https://www.investing.com/etfs/ishares-global-corporate-bond-$-historical-data")
-    # driver.get("https://www.investing.com/funds/amundi-msci-wrld-ae-c-historical-data")
+    
     driver.get(url)
 
     # Wait until the cookie element is visible and utomatically close it
